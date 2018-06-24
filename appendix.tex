@@ -1,0 +1,208 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Appendix
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\appendix
+\section{Proof of Lemma~\ref{lm:ip-2n}}
+\begin{proof}
+	We start with proving it for leaves labeled with $0$.
+	Let $R_l = X_l \times Y_l$ be a rectangle of leaf $l$ labeled with $0$,
+	i.e., $R_l$ is $0$-monochromatic. For every $x\in X_l$ and $y\in Y_l$, $\IP_n(x,y) = 0$,
+	set $X_l$ must be contained in the orthogonal complement for span of $Y_l$. Thus,
+	$\dim(\{X_l\}) + \dim(\{Y_l\})\le n$, and hence, $|R| = |X_l|\times|Y_l| \le 2^n$.
+	
+	If leaf is labeled with $1$ then 
+	for every $x\in X_l$ and $y\in Y_l$, $\IP_n(x,y) = 1$.
+	Let $y'$ be arbitrary element of $Y_l$. 
+	Consider a set $Y_l' = \{y \oplus y'\mid y\in Y_l\}$.
+	It is easy to see that for every $x\in X_l$ and $y\in Y_l'$, $\IP_n(x,y) = 0$, so we can apply
+	the argument above to show that $|X_l|\times|Y_l'| \le 2^n$. It remains to notice that $|Y_l| = |Y_l'|$.
+\end{proof}
+
+\section{Proof of Theorem~\ref{thm:hds-disj}}
+\begin{proof}
+Alice and Bob process their inputs two bits per round, $\lceil n/\log 2\rceil$ rounds. 
+At round $i$ they process symbols $2i - 1$ and $2i$ in the following manner.
+\begin{center}
+\begin{tabular}{c|c|c}
+\bf Symbols & \bf Alice & \bf Bob \\\hline 
+00 & \tt send(0)  & \tt receive   \\\hline
+01 & \tt receive  & \tt send(0)   \\\hline
+10 & \tt receive  & \tt send(1) \\\hline
+11 & \tt receive  & \tt receive 
+\end{tabular}
+\end{center}
+At the end of communication Bob tells Alice whether there was a silent round in which
+Bob's input was $11$ (i.e., inputs are not disjoint). Alice tells Bob whether she ever
+received $0$ having $01$ or $11$, or received $1$ having $10$ or $11$ (again, inputs are not disjoint).
+\end{proof}
+
+\section{Proof of Theorem~\ref{thm:hds-ip}}
+\begin{proof}
+	Let $R_c$ be the rectangle of all possible inputs and $\mu(R) = |R|$.
+	Consider the following set of good rectangles: a rectangle $R_{silent} = R_{rr}$
+	where round is silent,
+	four rectangles
+	$R_{0*} = R_{00} \cup R_{01} \cup R_{0r}$,
+	$R_{1*} = R_{10} \cup R_{11} \cup R_{1r}$,
+	$R_{*0} = R_{00} \cup R_{10} \cup R_{r0}$,
+	$R_{*1} = R_{01} \cup R_{11} \cup R_{r1}$,
+	where one of players sends some bit, 
+	and a rectangle $R_{spent} = R_{00} \cup R_{01} \cup R_{10} \cup R_{11}$, where round is spent.
+	We claim one of these good rectangles has measure at least $\mu(R_c)/4$. 
+	
+	For $\mu(R) = |R|$ we can use the following fact.
+	Let $a_0$, $a_1$ and $a_r$ be the probability over all possible inputs that Alice sends $0$,
+	sends $1$, and receives, respectively. 
+	Analogously, we define $b_0$, $b_1$ and $b_r$ 
+	to be the probability that Bob sends $0$,
+	sends $1$, and receives.
+	It is easy to see that $a_0+a_1+a_r = b_0+b_1+b_r = 1$ and 
+	for all $\alpha,\beta \in \{0,1,r\}$, $\mu(R_{\alpha\beta}) = a_\alpha\cdot b_\beta\cdot \mu(R_c)$.
+	
+	We need to show that 
+	$\max\bigl\{ \mu(R_{0*}),\mu(R_{1*}),\mu(R_{*0}),\mu(R_{*1}),\mu(R_{silent}),\mu(R_{spent}))\bigr\}\ge \mu(R_c)/4.$ This is equivalent to showing that
+	$\max\bigl\{a_1,a_0,b_1,b_0,a_r b_r,(1-a_r)(1-b_r)\bigr\}\ge 1/4$ for any reals  $a_0,a_1,a_r,b_0,b_1,b_r\in[0,1]$, such that $a_0+a_1+a_r = b_0+b_1+b_r = 1$. 
+	If $a_0, a_1, b_0, b_1 < 1/4$ then $(1-a_r)(1-b_r)> 1/4$. Now we apply Lemma~\ref{lm:rect-elim} for $\mu_r = 4^n$, $\mu_\ell = 2^n$ (Lemma~\ref{lm:ip-2n}), $\alpha = 1/4$, and get the desired bound.
+\end{proof}
+
+
+\section{Proof of Theorem~\ref{thm:hdz-ip}}
+\begin{proof}
+	Let $R_c$ be the rectangle of all possible inputs and $\mu(R) = |R|$.
+	Consider the following set of good rectangles: $R_{slilent} = R_{rr}$, $R_{spent} = R_{11}$, $R_{1*} = R_{11}\cup R_{1r}$ and $R_{*1} = R_{11}\cup R_{r1}$.
+	We claim one of these good rectangles has measure at least 
+	$\frac{3 - \sqrt{5}}{2}\cdot \mu(R_c)$. We need to show that 
+	\[
+	\max\bigl\{ \mu(R_{1*}),\mu(R_{*1}),\mu(R_{silent}),\mu(R_{spent})\bigr\}\ge \frac{3 - \sqrt{5}}{2}\cdot\mu(R).
+	\]
+	It is equivalent to showing that for any $a,b \in [0,1]$,
+	$\max\bigl\{a,b,a b,(1-a)(1-b)\bigr\}\ge \frac{3 - \sqrt{5}}{2},$
+	where $a$ and $b$ denote the probabilities over all possible inputs that, 
+	respectively, Alice and Bob sends $1$. It's easy to see minimum value of $\max\bigl\{a,b,a b,(1-a)(1-b)\bigr\}$ is at most $1/2$, so we can consider only $a\le 1/2$ and $b\le 1/2$. Thus,
+	\[
+	\max\bigl\{a,b,a b,(1-a)(1-b)\bigr\} = 
+	\max\bigl\{a,b,(1-a)(1-b)\bigr\}.
+	\]
+	Now we can argue that minimum of this $\max$ is achieved when 
+	$a = b = (1-a) (1-b)$: indeed, increasing or decreasing $a$ or $b$ increases one of the arguments. 
+	Solving corresponding quadratic equation $a = (1-a)^2$ we get $a = \frac{3 - \sqrt{5}}{2}$, and hence 
+	$\max\bigl\{a,b,a b,(1-a)(1-b)\bigr\} \ge \frac{3 - \sqrt{5}}{2}.$
+	Applying Lemma~\ref{lm:rect-elim} for $\mu_r = 4^n$, $\mu_\ell = 2^n$, and $\alpha=\frac{3 - \sqrt{5}}{2}$ finishes the proof.
+\end{proof}
+
+\section{Proof of Theorem~\ref{thm:lb-a-eq}}
+\begin{proof}
+Let $R_c$ be the rectangle of all possible inputs and $\mu(R) = \bigl|\{(x,x)\in R\}\bigr|$.
+%To apply Lemma~\ref{lm:rect-elim} we assign each possible combination of actions a variable that
+%corresponds to a measure of the corresponding rectangle:
+%\begin{center}
+%\begin{tabular}{c|c|c|c}
+%\bf Alice\textbackslash Bob &  send 0 & send 1 &  receive \\\hline 
+%send 0  & $x_{00}$ & $x_{01}$ & $x_{0r}$ \\\hline
+%send 1  & $x_{10}$ & $x_{11}$ & $x_{1r}$ \\\hline
+%receive & $x_{r0}$ & $x_{r1}$ & $x_{rr}$ 
+%\end{tabular}
+%\end{center}
+Consider the following set of $5$ good rectangles: 
+$R_{spent} = R_{00} \cup R_{01} \cup R_{10} \cup R_{11},$
+%$\mu(R_{spent}) = x_{00}+x_{01}+x_{10}+x_{11}.$
+and four rectangles 
+\begin{align*}
+&R_{\bar 1\bar 1} = R_{00}\cup R_{0r}\cup R_{r0}\cup R_{rr}, 
+&R_{\bar 0\bar 1} = R_{10}\cup R_{1r}\cup R_{r0}\cup R_{rr},\\  
+&R_{\bar 1\bar 0} = R_{01}\cup R_{0r}\cup R_{r1}\cup R_{rr},  
+&R_{\bar 0\bar 0} = R_{11}\cup R_{1r}\cup R_{r1}\cup R_{rr},
+\end{align*}
+where Alice does not send $\alpha$ and Bob does not send $\beta$ some fixed bits $\alpha,\beta$.
+
+Now let us observe that together all these good rectangles cover the entire rectangle of possible input twice, and hence one of it has measure at least $2/5\cdot \mu(R_c)$.
+
+\end{proof}
+
+\section{Proof of Theorem~\ref{thm:lb-a-ip}}
+\begin{proof}
+Let $R_c$ be the rectangle of all possible inputs and $\mu(R) = |R|$. 
+We use a set of good rectangles consisted of rectangles
+$R_{spent}, R_{\bar 1 \bar 1}, R_{\bar 0 \bar 1}, R_{\bar 1 \bar 0}, R_{\bar 0 \bar 0}$ 
+from the proof of Theorem~\ref{thm:lb-a-eq} and four additional rectangles
+\begin{align*}
+&R_{0*} = R_{00}\cup R_{01}\cup R_{0r},
+&R_{*0} = R_{00}\cup R_{10}\cup R_{r0},\\
+&R_{1*} = R_{10}\cup R_{11}\cup R_{1r},
+&R_{*1} = R_{01}\cup R_{11}\cup R_{r1},
+\end{align*}
+where one of players sends some fixed bit. 
+The following lemma shows that for this set of good rectangles and 
+this specific measure we can prove a better bound.
+
+\begin{lemma}\label{lm:lp3/7}
+For all half-duplex protocols with adversary
+\[
+\max\bigl\{
+\mu(R_{spent}), 
+\mu(R_{0*}),
+\mu(R_{*0}),
+\mu(R_{1*}),
+\mu(R_{*1}),
+\mu(R_{\bar 1 \bar 1}),
+\mu(R_{\bar 0 \bar 1}),
+\mu(R_{\bar 1 \bar 0}),
+\mu(R_{\bar 0 \bar 0})\bigr\} \ge \tfrac{3}{7}\cdot \mu(R_c).
+\]
+\end{lemma}
+\begin{proof}
+We use the idea we have already seen in the proof of Theorem~\ref{thm:hds-ip}.
+Let $a_0$, $a_1$ and $a_r$ be the probabilities over all possible inputs that Alice sends $0$, sends $1$ and receives, respectively. 
+Analogously, we define $b_0$, $b_1$ and $b_r$ 
+to be the probabilities that Bob sends $0$,
+sends $1$ and receives.
+It is easy to see that $a_0+a_1+a_r = b_0+b_1+b_r = 1$ and 
+for all $\alpha,\beta \in \{0,1,r\}$, $\mu(R_{\alpha\beta}) = a_\alpha\cdot b_\beta\cdot \mu(R_c)$
+(it is important here that $\mu(R) = |R|$).
+Minimization of maximum of linear functions with such constraints can be reduced to a
+semidefinite programming problem giving us the desired bound.
+\end{proof}
+Application of the Lemma~\ref{lm:rect-elim} for $\mu_r = 4^n$, $\mu_\ell = 2^n$ and $\alpha = 3/7$,
+finishes the proof.
+\end{proof}
+
+\section{Proof of Theorem~\ref{thm:hda-ip-information}}
+\begin{proof}
+	Following the ideas and the notation of the proof of Theorem~\ref{thm:hds-ip-information}
+	it suffices to show that $I(\cX:\cE^{k+1}_B\mid\cY,\Pi^k_B)+I(\cY:\cE^{k+1}_A\mid\cX,\Pi^k_A)\leq 1.$
+	Let $(y,\pi^k_B)$ be a particular valid input-transcript pair for Bob.
+	Consider $I(\cX:\cE^{k+1}_B\mid E_{y,\pi^k_B})$ where $E_{y,\pi^k_B}$ denotes event
+	``$\cY=y,\Pi^k_B=\pi^k_B$''. Note that 
+	\begin{align*}
+	I(\cX:\cE^{k+1}_B\mid E_{y,\pi^k_B}) &\leq I(\cX,\Pi^k_A:\cE^{k+1}_B\mid E_{y,\pi^k_B}) \\
+	&= H(\cE^{k+1}_B\mid E_{y,\pi^k_B})-H(\cE^{k+1}_B\mid E_{y,\pi^k_B},\cX,\Pi^k_A).
+	\end{align*}
+	Suppose Bob will be receiving in round $k+1$; otherwise 
+	$
+	H(\cE^{k+1}_B\mid E_{y,\pi^k_B}) = H(\cE^{k+1}_B\mid E_{y,\pi^k_B},\cX,\Pi^k_A)=0.
+	$
+	Consider each $(x,\pi^k_A)$ input-transcript pair for Alice consistent with $(y,\pi^k_B)$.
+	Note that $H(\cE^{k+1}_B\mid\cY=y,\Pi^k_B=\pi^k_B,\cX=x,\Pi^k_A=\pi^k_A)$ will either be $0$, if Alice is sending a bit in round $k+1$, or $1$, if she is receiving.
+	The latter is because the adversary will choose whether Bob receives a $0$ or $1$ in round $k+1$ uniformly at random independent of Alice or Bob's transcripts or inputs.
+	Thus 
+	\[
+	H(\cE^{k+1}_B\mid E_{y,\pi^k_B},\cX,\Pi^k_A)=\Pr[\textrm{Alice receives}\mid E_{y,\pi^k_B}],
+	\]
+	and thus 
+	$
+	I(\cX:\cE^{k+1}_B\mid\cY=y,\Pi^k_B=\pi^k_B)\leq 1-\Pr[\textrm{Alice receives}\mid E_{y,\pi^k_B}]
+	\leq\Pr[\textrm{Alice sends}\mid E_{y,\pi^k_B}].
+	$
+	We then have that \begin{align*}
+	I(\cX:\cE^{k+1}_B\mid\cY,\Pi^k_B)
+	&=\sum_{(y,\pi^k_B)}\Pr[E_{y,\pi^k_B}]\cdot I(\cX:\cE^{k+1}_B\mid E_{y,\pi^k_B})\\
+	&\leq \sum_{(y,\pi^k_B)}\Pr[\textrm{Alice sends}, E_{y,\pi^k_B}]\cdot\mathbf{1}[\textrm{Bob receives}]\\
+	&\leq \Pr[\textrm{Alice sends, Bob receives}].
+	\end{align*}
+	A symmetric argument holds for Alice, giving 
+	\begin{multline*}
+	I(\cX:\cE^{k+1}_B\mid\cY,\Pi^k_B)+I(\cY:\cE^{k+1}_A\mid\cX,\Pi^k_A)\\
+	\leq \Pr[\textrm{Alice sends, Bob receives}] + \Pr[\textrm{Alice receives, Bob sends}]\leq 1.
+	\end{multline*}
+\end{proof}
+

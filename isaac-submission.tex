@@ -1,0 +1,73 @@
+\documentclass[a4paper,USenglish]{lipics-v2018}
+\usepackage[utf8]{inputenc}
+
+\usepackage{microtype}%if unwanted, comment out or use option "draft"
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{todonotes}
+
+\newtheorem{conjecture}{Conjecture}
+
+\newcommand{\EQ}{\mathrm{EQ}}
+\newcommand{\IP}{\mathrm{IP}}
+\newcommand{\IC}{\mathrm{IC}}
+\newcommand{\DISJ}{\mathrm{DISJ}}
+
+\newcommand{\cA}{\mathcal{A}}
+\newcommand{\cE}{\mathcal{E}}
+\newcommand{\cX}{\mathcal{X}}
+\newcommand{\cY}{\mathcal{Y}}
+\newcommand{\cP}{\mathcal{P}}
+
+\DeclareMathOperator*{\E}{\mathbb{E}}
+
+%\bibliographystyle{abbrv}
+
+% % % % % 
+% TITLE %
+% % % % %
+\title{Half-duplex communication complexity} 
+
+\author{Kenneth Hoover}{University of California San Diego}{khooveri@eng.ucsd.edu}{}{}
+\author{Russell Impagliazzo}{University of California San Diego}{russell@cs.ucsd.edu}{}{}
+\author{Ivan Mihajlin}{University of California San Diego}{ivmihajlin@gmail.com}{}{}
+\author{Alexander V. Smal}{St.\,Petersburg Department of Steklov Mathematical Institute of Russian Academy of Sciences}{smal@pdmi.ras.ru}{}{}
+
+%\author{John Q. Public}{Dummy University Computing Laboratory\\{[Address, Country]}}{johnqpublic@dummyuni.org}{https://orcid.org/0000-0002-1825-0097}{[funding]}%mandatory, please use full name; only 1 author per \author macro; first two parameters are mandatory, other parameters can be empty.
+
+%\author{Joan R. Public}{Department of Informatics, Dummy College\\{[Address, Country]}}{joanrpublic@dummycollege.org}{[orcid]}{[funding]}
+
+\authorrunning{R. Impagliazzo, K. Hoover, I. Mihajlin, A.V. Smal}%mandatory. First: Use abbreviated first/middle names. Second (only in severe cases): Use first author plus 'et. al.'
+
+\Copyright{Russell Impagliazzo, Kenneth Hoover, Ivan Mihajlin, Alexander V. Smal}%mandatory, please use full first names. LIPIcs license is "CC-BY";  http://creativecommons.org/licenses/by/3.0/
+
+\subjclass{\ccsdesc[100]{Theory of computation~Computational complexity and cryptography~Communication complexity}}% mandatory: Please choose ACM 2012 classifications from https://www.acm.org/publications/class-2012 or https://dl.acm.org/ccs/ccs_flat.cfm . E.g., cite as "General and reference $\rightarrow$ General literature" or \ccsdesc[100]{General and reference~General literature}. 
+
+\keywords{communication complexity; half-duplex channel; information theory}%mandatory
+
+%\category{}%optional, e.g. invited paper
+
+%\relatedversion{}%optional, e.g. full version hosted on arXiv, HAL, or other respository/website
+
+%\supplement{}%optional, e.g. related research data, source code, ... hosted on a repository like zenodo, figshare, GitHub, ...
+
+%\funding{}%optional, to capture a funding statement, which applies to all authors. Please enter author specific funding statements as fifth argument of the \author macro.
+
+%\acknowledgements{We want to thank \dots}%optional
+
+\begin{document}
+	\maketitle
+	
+	\input{body}
+	
+	\bibliographystyle{plainurl}% the recommnded bibstyle
+	\bibliography{half-duplex}
+	
+	\input{appendix}
+	
+	%\listoftodos
+	
+\end{document}
