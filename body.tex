@@ -1,33 +1,30 @@
 \begin{abstract}
-Suppose Alice and Bob are communicating bits to each other in order to compute some function $f$, but instead of a classical communication channel they have a pair of walkie-talkie devices. They can use some classical communication protocol for $f$ where each round one player sends bit and the other one receives it. The question is whether talking via walkie-talkie gives them more power? Using walkie-talkie instead of a classical communication channel allows players two extra possibilities: to speak simultaneously (but in this case they do not hear each other) and to listen at the same time (but in this case they do not transfer any bits). Such kind of a communication model is motivated by a study of the KRW conjecture. We show that for some definitions this non-classical communication model is, in fact, more powerful than the classical one as it allows to compute some functions in a smaller number of rounds. We also prove lower bounds for these models using both combinatorial and information theoretic methods.
+Suppose Alice and Bob are communicating in order to compute some function $f$, but instead of a classical communication channel they have a pair of walkie-talkie devices. They can use some classical communication protocol for $f$ where each round one player sends a bit and the other one receives it. The question is whether talking via walkie-talkie gives them more power? Using walkie-talkie instead of a classical communication channel allows players two extra possibilities: to speak simultaneously (but in this case they do not hear each other) and to listen at the same time (but in this case they do not transfer any bits). The motivation for this kind of a communication model is coming from the study of the KRW conjecture. We show that for some definitions this non-classical communication model is, in fact, more powerful than the classical one as it allows to compute some functions in a smaller number of rounds. We also prove lower bounds for these models using both combinatorial and information theoretic methods.
 \end{abstract}
 
 
 \section{Introduction}
-In the classical communication complexity introduced by Yao \cite{Yao79} there are two players,
-Alice and Bob, that are trying to compute $f(x,y)$, for some function $f$, where $x$ is given to Alice and $y$ is given to Bob. Alice and Bob can communicate by sending bits to each other, one bit
+In the classical communication complexity introduced by Yao \cite{Yao79}  two players, Alice and Bob,  are trying to compute $f(x,y)$, for some function $f$, where Alice knows only $x$ and Bob knows only $y$. Alice and Bob can communicate by sending bits to each other, one bit
 per round. The essential property of this \emph{classical} model is that in every round of communication one player
 sends some bit and the other one receives it.
 
 We define three new communication models that generalize the classical one and resemble
 communication over so-called \emph{half-duplex channels}.  A well-known example of half-duplex
-communication is talking via walkie-talkie: you have to hold a ``push-to-talk'' button in order to speak 
-to other person, and you have to release it when you want to listen. 
+communication is talking via walkie-talkie: one has to hold a ``push-to-talk'' button to speak to another person, and one has to release it w want to listen. 
 If by accident two persons try to speak simultaneously then they do not hear each other. 
 We consider communication models where players are allowed to speak simultaneously. 
 Every round each player chooses one of three
 actions: send $0$, send $1$, or receive. There are three different types of rounds.
 If one player sends some bit and the other one receives then
 communication works like in the classical case, we call such rounds \emph{normal}. 
-If both players send bits in a round then these bits get lost (the same happens if two persons try
+If both players send bits in during the round then these bits get lost (the same happens if two persons try
 to speak via walkie-talkie simultaneously), we call these rounds \emph{spent}. 
 If both players receive, we call these rounds \emph{silent}. We distinguish three
 possible models, based on what happens in silent rounds. If in silent rounds
 both players receive $0$, i.e., players cannot distinguish a silent round from a normal round
-where the other player sends $0$, we call this model \emph{half-duplex communication with zero}. Somewhat similar model was studied in~\cite{EKS17} for multi-party communication 
-with noisy broadcast channel. Two other models we will define later.
+where the other player sends $0$, we call this model \emph{half-duplex communication with zero}. A somewhat similar model was studied in~\cite{EKS17} for multi-party communication with the noisy broadcast channel. Two other models, we will define later.
 
-In this paper we study communication complexity of Boolean functions that are hard in the classical case. It is important to note that we care about multiplicative constants. Every classical communication can be viewed as half-duplex communication with zero and every half-duplex communication with zero can be simulated with classical communication doubling the number of rounds (see Theorem~\ref{thm:trivial-ub} and~\ref{thm:trivial-lb-2}). 
+In this paper, we study communication complexity of Boolean functions that are hard in the classical case. It is important to note that we care about multiplicative constants. Every classical communication can be viewed as half-duplex communication with zero and every half-duplex communication with zero can be simulated with classical communication doubling the number of rounds (see Theorem~\ref{thm:trivial-ub} and~\ref{thm:trivial-lb-2}). 
 So the complexity of half-duplex communication is sandwiched between the complexity of the classical case and a half of it. The task of this study is to improve these bounds.
 
 \subsection{Motivation}
@@ -40,7 +37,7 @@ y_i$. Let $D(KW(f))$ be a minimal number of rounds that is enough to solve KW ga
 Let $f:\{0,1\}^n\to\{0,1\}$ and $g:\{0,1\}^m\to\{0,1\}$ be Boolean non-constant functions.
 Then $D(KW(g\circ f))\approx D(KW(g)) + D(KW(f))$, where $g\circ f$ denotes a \emph{composition} $g\circ f : (\{0,1\}^n)^m\to\{0,1\}$ is defined by
 \(
-	(g\circ f)(x_1,\dotsc,x_m) = g(f(x_1),\dotsc, f(x_m))
+    (g\circ f)(x_1,\dotsc,x_m) = g(f(x_1),\dotsc, f(x_m))
 \)
 where $x_1,\dotsc,x_n\in\{0,1\}^m$.
 \end{conjecture}
@@ -53,44 +50,42 @@ as the truth table of some function $f:\{0,1\}^n\to\{0,1\}$ and the second part 
 Multiplexers are similar to universal relations in the sense that there is a natural reduction 
 from a KW game for some function $f:\{0,1\}^n\to\{0,1\}$ to a KW game for multiplexer $M_n$: if Alice and Bob are given $x$ and $y$ in the game for $f$ we give them $(tt(f), x)$ 
 and $(tt(f),y)$, respectively, in the game for $M_n$, where $tt(f)$ is a truth table of function $f$. 
-On the other hand multiplexers are functions, not relations, so proving analogous
+On the other hand, multiplexers are functions, not relations, so proving analogous
 results for multiplexers would be one step toward proving KRW conjecture.
-Unfortunately all the techniques that were used for universal relations cannot be applied directly 
+Unfortunately, all the techniques that were used for universal relations cannot be applied directly 
 to multiplexers because it is impossible to give Alice and Bob the same input string
-(all these techniques exploited a symmetry of universal relations that allows to give players the same input string, but this is impossible for functions because inputs of Alice and Bob come from disjoint sets).
+(all these techniques exploited the symmetry of universal relations that allows giving players the same input string, but this is impossible for functions because inputs of Alice and Bob come from disjoint sets).
 
 Suppose now that Alice and Bob are playing KW game for multiplexer $M_n$: Alice is
 given $(tt(f), x)$, $x\in f^{-1}(0)$, and Bob is given $(tt(g), y)$, $y\in g^{-1}(1)$. If the
 players are also given a promise that $f=g$ (note that $f$ and $g$ are parts players inputs, so Alice and Bob plays KW game for $M_n$ on a subset of inputs) then they can use a protocol for KW 
 game for $f$. 
-But what if they do not have such a promise (i.e., all inputs are possible, in particular such that $f\neq g$)?
+However, what if they do not have such a promise (i.e., all inputs are possible, in particular, such that $f\neq g$)?
 Alice can still try to act as if she plays KW game for $f$, 
 Bob at the same time can try to act as if he plays KW game for $g$,
 but if in fact $f\neq g$ then in some round of this ``mixed'' protocol they might
 both want to send or both want to receive at the same time.  
-Such protocol ``mixing'' can not be done  in the classical model. 
-To make it possible we extend the communication model by 
-allowing players to speak or listen simultaneously. How does it affect the communication complexity? Answering this question we care about multiplicative constants~--- 
-if in this model all (hard) functions become two times easier in respect to classical case then this model is useless for proving KRW conjecture.
-As a first step toward answering this question we study half-duplex communication complexity of Boolean functions $\{0,1\}^n\times\{0,1\}^n\to \{0,1\}$ in respect to the classical case. 
+Such protocol ``mixing'' is impossible in the classical model. 
+To make it possible we extend the communication model by allowing players to speak or listen simultaneously. How does it affect the communication complexity? Answering this question we care about multiplicative constants~--- 
+if in this model all (hard) functions become two times easier in respect to the classical case then this model is useless for proving KRW conjecture.
+As a first step toward answering this question, we study half-duplex communication complexity of Boolean functions $\{0,1\}^n\times\{0,1\}^n\to \{0,1\}$ in respect to the classical case. 
 
 \subsection{Organization of this paper}
 In Section~\ref{sec:defs}, we give definitions for considered communication models. Then, in Section~\ref{sec:trivial-bounds}, we prove trivial upper and lower bounds that follows immediately from the definitions. Next, in Section~\ref{sec:methods}, we discuss methods for proving communication complexity lower bounds. In Sections~\ref{sec:hds}, \ref{sec:hdz} and \ref{sec:hda}, we present our main results, upper and lower bounds for proposed communication models. Finally, in Section~\ref{sec:open-questions}, we state several open questions.
 
 \section{Definitions}\label{sec:defs}
 \begin{definition}
-Let $X$, $Y$ and $Z$ be some finite sets. We say that two players, Alice and Bob, are solving
+Let $X$, $Y$, and $Z$ be some finite sets. We say that two players, Alice and Bob, are solving
 \emph{half-duplex communication problem} for relation $R \subseteq X\times Y\times Z$ if sets $X$, $Y$, $Z$, and
 relation $R$ are known by both players, Alice is given some $x\in X$, Bob is given some $y\in Y$,
 and players want to find some $z\in Z$ such that $(x,y,z)\in R$, by communicating to each other. 
-The communication is organized in rounds. At every round, each player decides 
-(depending only on its own input and previous communication) to
+The communication is organized into rounds. At every round, each player decides 
+(depending only on their inputs and previous communication) to
 do one of three available actions: send 0, send 1 or receive.
 If one player sends some bit $b\in\{0,1\}$ and the other one receives then the latter gets bit $b$, we
 call such rounds \emph{normal}.
 If both players send bits at the same time then these bits get lost, we call such rounds
-\emph{spent} (it is important that the player that is sending can not distinguish whether this round
-is normal or spent).
+\emph{spent} (it is crucial that the player that is sending cannot distinguish whether this round is normal or spent).
 If both players receive at the same time, we call such rounds \emph{silent}.
 There are three variants of half-duplex communication problem depending
 on how silent rounds work.
@@ -106,14 +101,11 @@ on how silent rounds work.
 We say that half-duplex communication problem for $R$ is \emph{solved} if at the end of communication both players know some $z$, such that $(x,y,z)\in R$.
 \end{definition} 
 
-Next we define a notion of \emph{communication protocol}. 
-In the classical case a protocol is a binary rooted tree that describes communication of players on all possible inputs: every internal node corresponds to a state 
-of communication and defines which of players is sending
+Next, we define a notion of \emph{communication protocol}. 
+In the classical case, a protocol is a binary rooted tree that describes communication of players on all possible inputs: every internal node corresponds to a state of communication and defines which of players is sending
 this round. Unlike the classical case in half-duplex
-communication player does not always know what was the
-other's player action~--- the information about it can 
-be ``lost'' i.e., in spent rounds player do not know 
-what was that other's player action. 
+communication player does not always know what the
+other's player action was ~--- the information about it can be ``lost,'' i.e., in spent rounds player do not know what the other player's action was. 
 It means that a player might not know what node of the protocol corresponds
 to the current state of communication. 
 Note also that solving half-duplex communication problem with zero 
@@ -136,10 +128,8 @@ is a set of child nodes of $v$.  Root nodes of $T_A$ and
 $T_B$ correspond, respectively, to the initial states of Alice and Bob.
 If Alice (Bob) is in a state that corresponds to node $v\in T_A$ ($v\in T_B$), 
 then she does action $g_v(x)$ (he does action $g_v(y)$). 
-Events of both players are defined in a natural way by their actions in this round. 
-The next node of the protocol is defined by the function $h$.
-When players reach leaves communication ends (they always reach leaves simultaneously). 
-The protocol is correct if for every input pair 
+Events of both players are defined in a natural way by their actions in this round. The next node of the protocol is defined by the function $h$.
+When players reach a leaf they stop (they always reach a leaf simultaneously).  The protocol is correct if for every input pair 
 $(x,y)\in X\times Y$ communication ends 
 in a pair of leaves labeled with the same 
 $z\in Z$ such that $(x,y,z) \in R$.
@@ -156,7 +146,7 @@ on all possible inputs $(x,y)\in X\times Y$ and for any strategy of
 adversary $w\in\{0,1\}^*$. The structure of the protocol is the same
 as in half-duplex communication protocol with zero, but with 
 $\cE = \{\texttt{send(0)}, \texttt{send(1)}, \texttt{receive(0)}, \texttt{receive(1)}\}$. 
-If both players decide to receive in round $i$ then Alice and Bob receive
+If both players decide to receive in round $i$, then Alice and Bob receive
 bits $w_{2i-1}$ and $w_{2i}$ respectively.
 The protocol is correct if for every input pair 
 $(x,y)\in X\times Y$ and any strategy of 
@@ -166,7 +156,7 @@ in two leaves labeled with the same $z\in Z$ such that $(x,y,z) \in R$.
 For each of these models, a \emph{partial transcript after $k$ rounds} is a pair $(\pi_a,\pi_b)$ of length-$k$ sequences over $\cE$ that lists the events observed by Alice and Bob, respectively, after running some protocol on a pair of inputs for $k$ rounds.
 \end{definition}
 The cardinality of set $\cE$ upper bounds arity of trees $T_A$ and $T_B$: arity is $5$ for half-duplex communication with silence,
-$3$ for half-duplex communication with zero, and $4$ for half-duplex communication with adversary.
+$3$ for half-duplex communication with zero, and $4$ for half-duplex communication with the adversary.
 
 \begin{definition}
 Half-duplex communication protocol \emph{solves} a communication 
@@ -188,10 +178,10 @@ In this paper we study half-duplex communication complexity for a special case o
 functions $\{0,1\}^n\times\{0,1\}^n\to \{0,1\}$ (i.e., $X=Y=\{0,1\}^n$, $Z=\{0,1\}$).
 \begin{definition}\mbox{}
 \begin{itemize}
-	\item \emph{Equality function$  $} $\EQ_n: \{0,1\}^n\times\{0,1\}^n\to \{0,1\}$, such that $\EQ_n(x,y) = 1 \iff x=y$.
-	\item \emph{Inner product function} $\IP_n:\{0,1\}^n\times\{0,1\}^n\to \{0,1\}$, such that $\IP_n(x,y) = \bigoplus_{i\in[n]} x_i y_i$.
-	\item \emph{Disjointness function} $\DISJ_n:\{0,1\}^n\times\{0,1\}^n\to \{0,1\}$, such that 
-	$\DISJ_n(x,y) = 1 \iff \forall i: x_i \neq 1 \lor y_i \neq 1$.
+    \item \emph{Equality function$  $} $\EQ_n: \{0,1\}^n\times\{0,1\}^n\to \{0,1\}$, such that $\EQ_n(x,y) = 1 \iff x=y$.
+    \item \emph{Inner product function} $\IP_n:\{0,1\}^n\times\{0,1\}^n\to \{0,1\}$, such that $\IP_n(x,y) = \bigoplus_{i\in[n]} x_i y_i$.
+    \item \emph{Disjointness function} $\DISJ_n:\{0,1\}^n\times\{0,1\}^n\to \{0,1\}$, such that 
+    $\DISJ_n(x,y) = 1 \iff \forall i: x_i \neq 1 \lor y_i \neq 1$.
 \end{itemize}
 All these function require $n$ bits of communication in the classical model.
 \end{definition}
@@ -208,22 +198,20 @@ Every classical communication protocol can be embedded in half-duplex communicat
 that does not use spent and silent rounds.
 \end{proof}
 
-Next theorem shows that every half-duplex protocol with zero or with adversary can be transformed
-in a classical communication protocol of double depth. 
+Next theorem shows that one can always transform half-duplex protocol with zero or with the adversary into
+ a classical communication protocol of double depth. 
 \begin{theorem}\label{thm:trivial-lb-2}
 For every function $f:\{0,1\}^n\times \{0,1\}^n \to \{0,1\}$, 
 $\frac{D(f)}{2}\le D^{hd}_0(f) \le D^{hd}_a(f).$
 \end{theorem}
 \begin{proof}
-Every $t$-round half-duplex communication protocol with zero or with adversary can be transformed 
-into $2t$-round classical communication protocol. Every round of the original protocol corresponds
-to two consecutive rounds of the new one: at first round Alice sends a bit she was sending in the original protocol or sends $0$ if she was receiving, at second round Bob does the same thing.
+Every $t$-round half-duplex communication protocol with zero or with the adversary can be transformed into $2t$-round classical communication protocol. Every round of the original protocol corresponds
+to two consecutive rounds of the new one: on the first round Alice sends a bit she was sending in the original protocol or sends $0$ if she was receiving, at second round Bob does the same thing.
 \end{proof}
 
 As we will see later, half-duplex protocols with silence can use silent rounds as an additional third 
 symbol and hence not every $t$-round half-duplex protocol with silence can be embedded in $2t$ 
-classical protocol. The following theorem shows that instead we can embed every such protocol 
-in a classical protocol with $3t$ rounds.
+classical protocol. The following theorem shows that instead, we can embed every such protocol in a classical protocol with $3t$ rounds.
 \begin{theorem}\label{thm:trivial-lb-3}
 For every function $f:\{0,1\}^n\times \{0,1\}^n \to \{0,1\}$,
 $D^{hd}_s(f) \ge \frac{D(f)}{3}.$
@@ -231,11 +219,11 @@ $D^{hd}_s(f) \ge \frac{D(f)}{3}.$
 \begin{proof}
 Every $t$-round half-duplex communication protocol with silence can be transformed into $3t$-round
 classical communication protocol. Every round of the original protocol corresponds to three consecutive
-rounds of the new one: at first round Alice sends $1$ to indicate if she was sending a bit in the original protocol, or sends $0$ otherwise, at second round Bob does the same thing symmetrically. After that they are both aware of the intentions of each other. If they were both planning to send, they can skip the third round. If they were both planning to receive, then they can just assume that they heard silence. If one player was planning to send and the other one was planning to receive they can perform such an action on third round.
+rounds of the new one: on the first round, Alice sends $1$ to indicate if she was sending a bit in the original protocol, or sends $0$ otherwise, at second round Bob does the same thing symmetrically. After that, they are both aware of the intentions of each other. If they were both planning to send, they could skip the third round. If they were both planning to receive, then they can assume that they heard silence. If one player was planning to send and the other one was planning to receive they can perform such action on the third round.
 \end{proof}
 \begin{remark}
-	Theorems~\ref{thm:trivial-ub}, \ref{thm:trivial-lb-2}, and \ref{thm:trivial-lb-3} holds also for 
-	$f:\{0,1\}^n\times\{0,1\}^n\to \{0,1\}^k$.
+    Theorems~\ref{thm:trivial-ub}, \ref{thm:trivial-lb-2}, and \ref{thm:trivial-lb-3} holds also for 
+    $f:\{0,1\}^n\times\{0,1\}^n\to \{0,1\}^k$.
 \end{remark}
 
 
@@ -243,11 +231,10 @@ rounds of the new one: at first round Alice sends $1$ to indicate if she was sen
 \subsection{Rectangles}\label{subsec:rectangles}
 Many lower bounds on classical communication complexity were proved by considering
 combinatorial rectangles associated with the nodes of communication protocol~\cite{KN97}: 
-it's easy to see that every node $v$ of the (classical)
+it is easy to see that every node $v$ of the (classical)
 protocol corresponds to a combinatorial rectangle $R_v = X_v\times Y_v$, 
 where $X_v\subseteq X$, $Y_v\subseteq Y$, such that if Alice and Bob are given an input from $R_v$
-then their communication will necessarily pass through node $v$. This implies that the rectangles 
-associated with the child nodes of $v$ define a subdivision of $R_v$.
+then their communication will necessarily pass through node $v$. This implies that the rectangles associated with the child nodes of $v$ define a subdivision of $R_v$.
 
 There is a general technique~\cite{KN97} for proving lower bounds using associated combinational rectangles in: if for some sub-additive measure  $\mu$ defined on combinatorial rectangles we show both a lower bound on the measure of $X\times Y$, the rectangle in the root node, i.e., $\mu(X\times Y)\ge \mu_r$ for some $\mu_r>0$, and
 an upper bound on the measure of rectangles in leaves, i.e., for every leaf $l$ the measure
@@ -261,10 +248,10 @@ for some $z\in Z$ if for all $(x,y)\in R$, $f(x,y) = z$.
 As far as both players have to come up with the same answer at the end of 
 communication every rectangle in leaves is monochromatic, thus for this measure $\mu_\ell = 1$.
 
-Almost the same technique can be used for half-duplex protocols. 
+We can use almost the same technique for half-duplex protocols. 
 There are some technical differences that we have to keep in mind. 
-First of all, we can apply this idea for both trees $T_A$ and $T_B$. 
-We should also note that trees $T_A$ and $T_B$ are non-binary, hence
+First of all, we can apply this idea to both trees $T_A$ and $T_B$. 
+We should also note that trees $T_A$ and $T_B$ are non-binary; hence
 arity became the base of the logarithm. 
 Secondly, we should be careful while defining associated 
 combinatorial rectangles for half-duplex protocols with adversary~--- 
@@ -306,9 +293,7 @@ $(x,y)\in R_{good}$, then there is no need in the first round~---
 the information the players get about the other part of the input is fixed: Alice does not get any
 information, Bob can receive $0$ if he decide to receive. On the other hand if we restrict $f$ to $R_{bad}$ then the first round is still needed: Bob can receive both $0$ and $1$ and
 this information in necessary to proceed to the next round. Lets call a rectangle $R$ \emph{good for (partial) function $f$} if restricting $f$ to $R$ makes the first round unnecessary (i.e., protocol without the first round is correct for all $(x,y)\in R$).
-The idea of this method is to consider
-some covering of $R_c$ with a set of \emph{good}
-rectangles and prove that there is always a good rectangle of large enough measure.  If we can show
+The idea of this method is to consider some covering of $R_c$ with a set of \emph{good} rectangles and prove that there is always a good rectangle of large enough measure.  If we can show
 that there is always a rectangle of measure at least $\alpha\cdot\mu(R_c)$ then 
 we can iterate this idea and claim that protocol depth is at least 
 $\log_{1/\alpha}(\mu_r/\mu_\ell)$, where $\mu_r$ is a lower bound 
@@ -328,37 +313,37 @@ until we reach a leaf. Thus there are at least $\log_{1/\alpha}(\mu_r/\mu_\ell)$
 \end{proof}
 
 \subsection{Upper bound on internal information}\label{subsec:information}
-Another useful tool for proving lower bounds on the communication complexity of problems in the classical model is the upper bound on the information Alice and Bob have learned about the other's inputs, as a function of the number of rounds that have been run. 
+Another useful tool for proving lower bounds on the communication complexity of problems in the classical model is the upper bound on the information Alice and Bob have learned about the other's inputs, as a function of the number of rounds. 
 \begin{definition}
-	Let $f$ be a partial function and $\cP$ a half-duplex communication protocol computing $f$, and $\mathcal{D}$ an arbitrary distribution over the range of $f$.
-	Let $\cX$ and $\cY$ be the marginal distributions over inputs to Alice and Bob,
-	and let $\Pi_A$ and $\Pi_B$ be the marginal distributions over Alice and Bob's transcripts 
-	induced by $\mathcal{D}$.
-	An \emph{internal information cost of protocol $\cP$} is
-	\(
-	\IC_\mathcal{D}(\cP) = I(\cX:\Pi_B\mid\cY) + I(\cY:\Pi_A\mid\cX).
-	\)
-	For any $k$ let $\Pi_A^k$ and $\Pi_B^k$ be the marginal distributions over Alice and Bob's partial transcripts after running $\cP$ for $k$ rounds induced by $\mathcal{D}$.
-	An \emph{internal information cost of first $k$ rounds of $\cP$} is
-	\(
-	\IC_\mathcal{D}^k(\cP) = I(\cX:\Pi_B^k\mid\cY) + I(\cY:\Pi_A^k\mid\cX).
-	\)
+    Let $f$ be a partial function and $\cP$ a half-duplex communication protocol computing $f$, and $\mathcal{D}$ an arbitrary distribution over the range of $f$.
+    Let $\cX$, and $\cY$ be the marginal distributions over inputs to Alice and Bob,
+    also, let $\Pi_A$ and $\Pi_B$ be the marginal distributions over Alice and Bob's transcripts 
+    induced by $\mathcal{D}$.
+    An \emph{internal information cost of protocol $\cP$} is
+    \(
+    \IC_\mathcal{D}(\cP) = I(\cX:\Pi_B\mid\cY) + I(\cY:\Pi_A\mid\cX).
+    \)
+    For any $k$ let $\Pi_A^k$ and $\Pi_B^k$ be the marginal distributions over Alice and Bob's partial transcripts after running $\cP$ for $k$ rounds induced by $\mathcal{D}$.
+    An \emph{internal information cost of first $k$ rounds of $\cP$} is
+    \(
+    \IC_\mathcal{D}^k(\cP) = I(\cX:\Pi_B^k\mid\cY) + I(\cY:\Pi_A^k\mid\cX).
+    \)
 \end{definition}
 
-For more information on information theory we refer to~\cite{CTJ2006,GMWW17}. We use this approach
-to prove lower bounds on inner product using the following Lemma.
+For more information on information theory, we refer to~\cite{CTJ2006,GMWW17}. We use this approach
+to prove lower bounds on the inner product using the following Lemma.
 
 \begin{lemma}\label{lm:ip-information-common}
-	Let $\mathcal{D}$ be uniform distribution over all input pairs of $\IP_n$ (pairs of $n$-bit strings).
-	If any half-duplex communication protocol with silence/zero/adversary computing $\IP_n$ and for every $k$,
-	\(
-	\IC_\mathcal{D}^k(\cP) \le \alpha k,
-	\)
-	for some $\alpha\ge 1$, then half-duplex complexity of $\IP_n$ with silence/zero/adversary is at least $n/\alpha$. 
+    Let $\mathcal{D}$ be uniform distribution over all input pairs of $\IP_n$ (pairs of $n$-bit strings).
+    If any half-duplex communication protocol with silence/zero/adversary computing $\IP_n$ and for every $k$,
+    \(
+    \IC_\mathcal{D}^k(\cP) \le \alpha k,
+    \)
+    for some $\alpha\ge 1$, then half-duplex complexity of $\IP_n$ with silence/zero/adversary is at least $n/\alpha$. 
 \end{lemma}
 To prove this Lemma we use the following property of $\IP_n$ (the proof is given in Appendix).
 \begin{lemma}\label{lm:ip-2n}
-	Every leaf rectangle of a protocol for $\IP_n$ has size at most $2^n$. 
+    Every leaf rectangle of a protocol for $\IP_n$ has size at most $2^n$. 
 \end{lemma}
 \begin{proof}[Proof of Lemma~\ref{lm:ip-information-common}]
 For uniform distribution over all input pairs $H(\cX\mid\cY)+H(\cY\mid\cX)=2n.$
@@ -410,7 +395,7 @@ If $i$th round is silent then again one player knows if $i$th symbols are differ
 If after $\lceil n/\log 5\rceil$ rounds one of the players has already learned that the answer is $0$,
 then he or she sends $0$. If this round is not silent, then both players know that the answer is $0$.
 Otherwise, Alice and Bob have to make sure that there were no spent rounds.
-In order to check it, Alice sends the number normal rounds 
+To check it, Alice sends the number normal rounds 
 she was receiving in encoded in ternary, that requires $\lceil \log n / \log 3 \rceil$ rounds.
 Bob checks whether this number is equal to the number of rounds he was sending in. If so, inputs are equal.
 In the last round, Bob sends the answer back to Alice.
@@ -420,7 +405,7 @@ Using almost the same ideas we can show an upper bound for disjointness.
 $D^{hd}_s (\DISJ_n) \le \lceil n/2\rceil + 2$.
 \end{theorem}
 
-To prove lower bounds one can use round elimination and get the following lower bound for inner product (the proof is given in Appendix).
+To prove lower bounds one can use round elimination and get the following lower bound for the inner product (the proof is given in Appendix).
 
 \begin{theorem}\label{thm:hds-ip}
 $D^{hd}_s(\IP_n)\ge n/2.$
@@ -432,96 +417,95 @@ This lower bound can be improved using upper bound on internal information.
 $D^{hd}_s(\IP_n)\ge n/1.67$.
 \end{theorem}
 \begin{proof}
-	To apply Lemma~\ref{lm:ip-information-common} it is enough to show that 
-	$I(\cX:\Pi_B^k\mid\cY) + I(\cY:\Pi_A^k\mid\cX)\leq \alpha k,$ where 	$\alpha\le 1.67$.
-	We will induct on $k$, the number of rounds that have been run.
-	For $k=0$, there is only one possible partial transcript for either player, the empty transcript, and thus the result is immediate.
-	Now suppose that this is true in round $k$.
-	Let $\cE^{k+1}_A$ and $\cE^{k+1}_B$ be the marginal distributions over which event each player will observe.
-	Note that \begin{align*}
-	I(\cX:\Pi^{k+1}_B\mid\cY)&=H(\cX\mid\cY)-H(\cX\mid\cY,\Pi^{k+1}_B)\\
-	&=H(\cX\mid\cY)-H(\cX\mid\cY,\Pi^k_B)+H(\cX\mid\cY,\Pi^k_B)-H(\cX\mid\cY,\Pi^k_B,\cE^{k+1}_B)\\
-	&=I(\cX:\Pi^k_B\mid\cY)+I(\cX:\cE^{k+1}_B\mid\cY,\Pi^k_B).
-	\end{align*}
-	Thus, it suffices to show that $I(\cX:\cE^{k+1}_B\mid\cY,\Pi^k_B)+I(\cY:\cE^{k+1}_A\mid\cX,\Pi^k_A)\leq \alpha.$ 
-	Note that 
-	\[
-	I(\cX:\cE^{k+1}_B\mid\cY,\Pi^k_B)
-	= H(\cE^{k+1}_B\mid\cY,\Pi^k_B)-H(\cE^{k+1}_B\mid\cY,\Pi^k_B,\cX)
-	= H(\cE^{k+1}_B\mid\cY,\Pi^k_B).
-	\]
-	The second term here is zero because values of $\cX$ and $\cY$ unambiguously determine the entire protocol. 
-	So it is enough to bound $H(\cE^{k+1}_B\mid\cY,\Pi^k_B) =\E_{y,\pi}[H(\cE^{k+1}_B\mid\cY=y,\Pi^k_B=\pi)].$
+    To apply Lemma~\ref{lm:ip-information-common} it is enough to show that 
+    $I(\cX:\Pi_B^k\mid\cY) + I(\cY:\Pi_A^k\mid\cX)\leq \alpha k,$ where     $\alpha\le 1.67$.
+    We will induct on $k$: the number of rounds.
+    For $k=0$, there is only one possible partial transcript for either player, the empty transcript, and thus the result is immediate.
+    Now suppose that this is true in round $k$.
+    Let $\cE^{k+1}_A$ and $\cE^{k+1}_B$ be the marginal distributions over which event each player will observe.
+    Note that \begin{align*}
+    I(\cX:\Pi^{k+1}_B\mid\cY)&=H(\cX\mid\cY)-H(\cX\mid\cY,\Pi^{k+1}_B)\\
+    &=H(\cX\mid\cY)-H(\cX\mid\cY,\Pi^k_B)+H(\cX\mid\cY,\Pi^k_B)-H(\cX\mid\cY,\Pi^k_B,\cE^{k+1}_B)\\
+    &=I(\cX:\Pi^k_B\mid\cY)+I(\cX:\cE^{k+1}_B\mid\cY,\Pi^k_B).
+    \end{align*}
+    Thus, it suffices to show that $I(\cX:\cE^{k+1}_B\mid\cY,\Pi^k_B)+I(\cY:\cE^{k+1}_A\mid\cX,\Pi^k_A)\leq \alpha.$ 
+    Note that 
+    \[
+    I(\cX:\cE^{k+1}_B\mid\cY,\Pi^k_B)
+    = H(\cE^{k+1}_B\mid\cY,\Pi^k_B)-H(\cE^{k+1}_B\mid\cY,\Pi^k_B,\cX)
+    = H(\cE^{k+1}_B\mid\cY,\Pi^k_B).
+    \]
+    The second term here is zero because values of $\cX$ and $\cY$ unambiguously determine the entire protocol. 
+    So it is enough to bound $H(\cE^{k+1}_B\mid\cY,\Pi^k_B) =\E_{y,\pi}[H(\cE^{k+1}_B\mid\cY=y,\Pi^k_B=\pi)].$
 
-	Let $\cA^{k+1}_A$ and $\cA^{k+1}_B$ be the marginal distributions over players actions in round $k$. 
-	Note that $\cA^{k+1}_B$ is a function of $y$ and $\pi$. 
-	If for some pair $(y,\pi)$ Bob sends, 
-	i.e. $\cA^{k+1}_B = \texttt{send(0)}$ or $\cA^{k+1}_B = \texttt{send(1)}$, then $H(\cE^{k+1}_B\mid\cY=y,\Pi^k_B=\pi) = 0$. For the sake of brevity we denote $E_{y,\pi}$ an event ``$\cY=y,\Pi^k_B=\pi$'' and $r$ an action $\texttt{receive} \in\cA$.
-	\[
-	H(\cE^{k+1}_B\mid\cY,\Pi^k_B)
-	=\sum_{\substack{(y,\pi):\\\cA^{k+1}_B = r}}\Pr[E_{y,\pi}]\cdot H(\cE^{k+1}_B\mid E_{y,\pi}).
-	\]
-	Let $\cE_r = \{\texttt{receive(0)}, \texttt{receive(1)}, \texttt{silence}\}$ be a set of events that can happen to a player while receiving. For a pair $(y,\pi)$ such that  $\cA_B^{k+1} = r$,
-	\[
-	H(\cE^{k+1}_B\mid E_{y,\pi})=\sum_{e\in \cE_r} \Pr[\cE^{k+1}_B = e \mid E_{y,\pi}]\cdot \log\frac{1}{\Pr[\cE^{k+1}_B = e \mid E_{y,\pi}]},
-	\]
-	If Bob receives then his event in this round is defined by action of Alice.	
-	\begin{align*}
-	H(\cE^{k+1}_B\mid\cY,\Pi^k_B)
-	&=\sum_{\substack{(y,\pi):\\\cA^{k+1}_B = r}}\Pr[E_{y,\pi}]\cdot
-	\sum_{e\in \cE_r} \Pr[\cE^{k+1}_B = e \mid E_{y,\pi}]\cdot \log\frac{1}{\Pr[\cE^{k+1}_B = e \mid E_{y,\pi}]}\\
-	&=\sum_{e\in \cE_r} \sum_{\substack{(y,\pi):\\\cA^{k+1}_B = r}}
-	 \Pr[\cE^{k+1}_B = e , E_{y,\pi}]\cdot \log\frac{1}{\Pr[\cE^{k+1}_B = e \mid E_{y,\pi}]}\\
-	 &=\sum_{a\in \cA} \sum_{\substack{(y,\pi):\\\cA^{k+1}_B = r}}
-	 \Pr[\cA^{k+1}_A = a , E_{y,\pi}]\cdot \log\frac{1}{\Pr[\cA^{k+1}_A = a \mid E_{y,\pi}]}.
-	\end{align*}
-	Now we use Jensen's inequality.
-	\begin{align*}
-	&H(\cE^{k+1}_B\mid\cY,\Pi^k_B)\\
-	&\le \sum_{a\in \cA} 
-	\Pr[\cA^{k+1}_A = a , \cA^{k+1}_B = r]\cdot \log \sum_{\substack{(y,\pi):\\\cA^{k+1}_B = r}}
-	\frac{\Pr[\cA^{k+1}_A = a , E_{y,\pi}]}{\Pr[\cA^{k+1}_A = a , \cA^{k+1}_B = r]}\cdot \frac{1}{\Pr[\cA^{k+1}_A = a \mid E_{y,\pi}]}\\
-	&= \sum_{a\in \cA} 
-	\Pr[\cA^{k+1}_A = a , \cA^{k+1}_B = r]\cdot \log \sum_{\substack{(y,\pi):\\\cA^{k+1}_B = r}}
-	\frac{\Pr[E_{y,\pi}]}{\Pr[\cA^{k+1}_A = a , \cA^{k+1}_B = r]}\\
-	&= \sum_{a\in \cA} 
-	\Pr[\cA^{k+1}_A = a , \cA^{k+1}_B = r]\cdot \log 
-	\frac{\Pr[\cA^{k+1}_B = r]}{\Pr[\cA^{k+1}_A = a , \cA^{k+1}_B = r]}.
-	\end{align*}
-	Now we use independence of player's action choices.
-	\begin{equation*}\label{eq:common-entropy-bound}
-	H(\cE^{k+1}_B\mid\cY,\Pi^k_B)
-	\le \Pr[\cA^{k+1}_B = r] \cdot \sum_{a\in \cA} 
-	\Pr[\cA^{k+1}_A = a] \cdot \log 
-	\frac{1}{\Pr[\cA^{k+1}_A = a]}.
-	\end{equation*}
-	The same argument works for $I(\cY:\Pi_A^k\mid\cX)$ and hence we get,
-	\begin{align*}
-	I(\cX:\Pi_B^k\mid\cY) + I(\cY:\Pi_A^k\mid\cX)&\leq	
-	\Pr[\cA^{k+1}_B = r] \cdot \sum_{a\in \cA} 
-	\Pr[\cA^{k+1}_A = a] \cdot \log 
-	\frac{1}{\Pr[\cA^{k+1}_A = a]} \\
-	&+ 
-	\Pr[\cA^{k+1}_A = r] \cdot
-	\sum_{a\in \cA} 
-	\Pr[\cA^{k+1}_B = a] \cdot \log 
-	\frac{1}{\Pr[\cA^{k+1}_B = a]}.
-	\end{align*}
-	Now let's denote $a_0$ and $a_1$ to be the fractions of inputs for which Alice sends $0$ or $1$, respectively,
-	and symmetrically $b_0$ and $b_1$ to be the fractions of inputs for which Bob sends $0$ or $1$, respectively.
-	The right hand side of the above inequality can be rewritten as follows.
-	\begin{align*}
-	&(1 - b_0 - b_1) \cdot \Biggl( a_0\cdot\frac{1}{a_0} + a_1\cdot\frac{1}{a_1} + (1 - a_0 - a_1)\cdot\frac{1}{(1 - a_0 - a_1)} \Biggr)\\
-	+\ &(1 - a_0 - a_1) \cdot \Biggl( b_0\cdot\frac{1}{b_0} + a_1\cdot\frac{1}{b_1} + (1 - b_0 - b_1)\cdot\frac{1}{(1 - b_0 - b_1)}\Biggr).
-	\end{align*}
-	Numerical analysis of this expression shows that it's maximum is less then $1.67$ (for $a_0 = a_1= b_0 = b_1 \approx 0.17$), hence $I(\cX:\Pi_B^k\mid\cY) + I(\cY:\Pi_A^k\mid\cX)\leq 1.67$.
+    Let $\cA^{k+1}_A$ and $\cA^{k+1}_B$ be the marginal distributions over players actions in round $k$. 
+    Note that $\cA^{k+1}_B$ is a function of $y$ and $\pi$. 
+    If for some pair $(y,\pi)$ Bob sends, 
+    i.e. $\cA^{k+1}_B = \texttt{send(0)}$ or $\cA^{k+1}_B = \texttt{send(1)}$, then $H(\cE^{k+1}_B\mid\cY=y,\Pi^k_B=\pi) = 0$. For the sake of brevity we denote $E_{y,\pi}$ an event ``$\cY=y,\Pi^k_B=\pi$'' and $r$ an action $\texttt{receive} \in\cA$.
+    \[
+    H(\cE^{k+1}_B\mid\cY,\Pi^k_B)
+    =\sum_{\substack{(y,\pi):\\\cA^{k+1}_B = r}}\Pr[E_{y,\pi}]\cdot H(\cE^{k+1}_B\mid E_{y,\pi}).
+    \]
+    Let $\cE_r = \{\texttt{receive(0)}, \texttt{receive(1)}, \texttt{silence}\}$ be a set of events that can happen to a player while receiving. For a pair $(y,\pi)$ such that  $\cA_B^{k+1} = r$,
+    \[
+    H(\cE^{k+1}_B\mid E_{y,\pi})=\sum_{e\in \cE_r} \Pr[\cE^{k+1}_B = e \mid E_{y,\pi}]\cdot \log\frac{1}{\Pr[\cE^{k+1}_B = e \mid E_{y,\pi}]},
+    \]
+    If Bob receives then his event in this round is defined by action of Alice.    
+    \begin{align*}
+    H(\cE^{k+1}_B\mid\cY,\Pi^k_B)
+    &=\sum_{\substack{(y,\pi):\\\cA^{k+1}_B = r}}\Pr[E_{y,\pi}]\cdot
+    \sum_{e\in \cE_r} \Pr[\cE^{k+1}_B = e \mid E_{y,\pi}]\cdot \log\frac{1}{\Pr[\cE^{k+1}_B = e \mid E_{y,\pi}]}\\
+    &=\sum_{e\in \cE_r} \sum_{\substack{(y,\pi):\\\cA^{k+1}_B = r}}
+     \Pr[\cE^{k+1}_B = e , E_{y,\pi}]\cdot \log\frac{1}{\Pr[\cE^{k+1}_B = e \mid E_{y,\pi}]}\\
+     &=\sum_{a\in \cA} \sum_{\substack{(y,\pi):\\\cA^{k+1}_B = r}}
+     \Pr[\cA^{k+1}_A = a , E_{y,\pi}]\cdot \log\frac{1}{\Pr[\cA^{k+1}_A = a \mid E_{y,\pi}]}.
+    \end{align*}
+    Now we use Jensen's inequality.
+    \begin{align*}
+    &H(\cE^{k+1}_B\mid\cY,\Pi^k_B)\\
+    &\le \sum_{a\in \cA} 
+    \Pr[\cA^{k+1}_A = a , \cA^{k+1}_B = r]\cdot \log \sum_{\substack{(y,\pi):\\\cA^{k+1}_B = r}}
+    \frac{\Pr[\cA^{k+1}_A = a , E_{y,\pi}]}{\Pr[\cA^{k+1}_A = a , \cA^{k+1}_B = r]}\cdot \frac{1}{\Pr[\cA^{k+1}_A = a \mid E_{y,\pi}]}\\
+    &= \sum_{a\in \cA} 
+    \Pr[\cA^{k+1}_A = a , \cA^{k+1}_B = r]\cdot \log \sum_{\substack{(y,\pi):\\\cA^{k+1}_B = r}}
+    \frac{\Pr[E_{y,\pi}]}{\Pr[\cA^{k+1}_A = a , \cA^{k+1}_B = r]}\\
+    &= \sum_{a\in \cA} 
+    \Pr[\cA^{k+1}_A = a , \cA^{k+1}_B = r]\cdot \log 
+    \frac{\Pr[\cA^{k+1}_B = r]}{\Pr[\cA^{k+1}_A = a , \cA^{k+1}_B = r]}.
+    \end{align*}
+    Now we use independence of player's action choices.
+    \begin{equation*}\label{eq:common-entropy-bound}
+    H(\cE^{k+1}_B\mid\cY,\Pi^k_B)
+    \le \Pr[\cA^{k+1}_B = r] \cdot \sum_{a\in \cA} 
+    \Pr[\cA^{k+1}_A = a] \cdot \log 
+    \frac{1}{\Pr[\cA^{k+1}_A = a]}.
+    \end{equation*}
+    The same argument works for $I(\cY:\Pi_A^k\mid\cX)$ and hence we get,
+    \begin{align*}
+    I(\cX:\Pi_B^k\mid\cY) + I(\cY:\Pi_A^k\mid\cX)&\leq    
+    \Pr[\cA^{k+1}_B = r] \cdot \sum_{a\in \cA} 
+    \Pr[\cA^{k+1}_A = a] \cdot \log 
+    \frac{1}{\Pr[\cA^{k+1}_A = a]} \\
+    &+ 
+    \Pr[\cA^{k+1}_A = r] \cdot
+    \sum_{a\in \cA} 
+    \Pr[\cA^{k+1}_B = a] \cdot \log 
+    \frac{1}{\Pr[\cA^{k+1}_B = a]}.
+    \end{align*}
+    Now let's denote $a_0$ and $a_1$ to be the fractions of inputs for which Alice sends $0$ or $1$, respectively,
+    and symmetrically $b_0$ and $b_1$ to be the fractions of inputs for which Bob sends $0$ or $1$, respectively.
+    The right hand side of the above inequality can be rewritten as follows.
+    \begin{align*}
+    &(1 - b_0 - b_1) \cdot \Biggl( a_0\cdot\frac{1}{a_0} + a_1\cdot\frac{1}{a_1} + (1 - a_0 - a_1)\cdot\frac{1}{(1 - a_0 - a_1)} \Biggr)\\
+    +\ &(1 - a_0 - a_1) \cdot \Biggl( b_0\cdot\frac{1}{b_0} + a_1\cdot\frac{1}{b_1} + (1 - b_0 - b_1)\cdot\frac{1}{(1 - b_0 - b_1)}\Biggr).
+    \end{align*}
+    Numerical analysis of this expression shows that it's maximum is less then $1.67$ (for $a_0 = a_1= b_0 = b_1 \approx 0.17$), hence $I(\cX:\Pi_B^k\mid\cY) + I(\cY:\Pi_A^k\mid\cX)\leq 1.67$.
 \end{proof}
 
 
 \section{Half-duplex communication with zero}\label{sec:hdz}
 As we have already mentioned before there are only two reasonable actions in this model: send
-$1$ or receive. The following theorem shows that half-duplex communication with zero is more
-powerful than classical communication, namely, it is possible to compute equality
+$1$ or receive. The following theorem shows that half-duplex communication with zero is more powerful than classical communication; namely, it is possible to compute equality
 in less than $n$ rounds of communication. 
 %This result was unexpected for us~--- our initial
 %intuition prompted that in this setting silent and spent rounds would be useless.
@@ -545,7 +529,7 @@ they sent in the first phase. If inputs were different then one of players must 
 At the first phase at round $i$ Alice learns if their corresponding symbols 
 are $(0, 2)$, $(2,0)$ or $(2,1)$, Bob learns if their symbols are $(0, 1)$ or $(1,0)$.
 In the second phase, they can learn whether any of $(1,2)$ situation happened in
-the first phase. In the last round players notify each other if somebody
+the first phase. In the last round, players notify each other if somebody
 noticed a mismatch~— in this case the player that noticed it sends $1$.
 \end{proof}
 
@@ -568,9 +552,9 @@ where $h(p) = p\cdot\log\frac{1}{p} + (1 - p)\cdot\log\frac{1}{1 - p}$ is a bina
 \end{proof}
 
 \section{Half-duplex communication with adversary}\label{sec:hda}
-The main feature of this model is that receiving player can not be $100\%$ sure that
+The main feature of this model is that receiving player cannot be $100\%$ sure that
 the received bit if in fact is ``real'', i.e., this bit originates from the other player,
-not from an adversary. The protocol must be correct for any strategy of adversary.
+not from an adversary. The protocol must be correct for any strategy of the adversary.
 Our intuition prompts that in this setting silent and spent rounds would be useless.
 %There is a common obstacle our combinatorial methods faced when we were trying to prove this conjecture~— 
 %it could be the case that players send different bits in spent rounds.
@@ -581,7 +565,7 @@ Our intuition prompts that in this setting silent and spent rounds would be usel
 %bits in spent rounds (e.g., in this case, we immediately terminate the communication and make players output $0$)
 %then we can prove that $\EQ_n$ requires $n$ rounds of communication. 
 %The same bound can be achieved if we allow such spent rounds only on distinct inputs. 
-Using combinatorial methods one can show the following two lower bounds (the proofs are given in Appendix).
+Using combinatorial methods, one can show the following two lower bounds (the proofs are given in Appendix).
 
 \begin{theorem}\label{thm:lb-a-eq}
 $D^{hd}_a(\EQ_n) \ge n/\log 2.5$.
@@ -624,7 +608,7 @@ It would be interesting to improve upper and lower bounds for Boolean functions
 for all three half-duplex communication models.
 So we propose the following list of open problems.
 \begin{enumerate}
-\item Prove better upper and lower bounds for half-duplex model with silence and zero.
+\item Prove better upper and lower bounds for the half-duplex model with silence and zero.
 
 \item Is there any $\alpha < 1$ such that for any $f:\{0,1\}^n\times\{0,1\}^n\to\{0,1\}$, $D^{hd}_0(f)\le \alpha n + o(n)$?
 
