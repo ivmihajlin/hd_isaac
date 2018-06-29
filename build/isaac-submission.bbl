@@ -1,0 +1,78 @@
+\begin{thebibliography}{10}
+
+\bibitem{CTJ2006}
+Thomas~M. Cover and Joy~A. Thomas.
+\newblock {\em Elements of Information Theory (Wiley Series in
+  Telecommunications and Signal Processing)}.
+\newblock Wiley-Interscience, New York, USA, 2006.
+
+\bibitem{EIRS01}
+Jeff Edmonds, Russell Impagliazzo, Steven Rudich, and Jir{\'{\i}} Sgall.
+\newblock Communication complexity towards lower bounds on circuit depth.
+\newblock {\em Computational Complexity}, 10(3):210--246, 2001.
+\newblock URL: \url{https://doi.org/10.1007/s00037-001-8195-x}, \href
+  {http://dx.doi.org/10.1007/s00037-001-8195-x}
+  {\path{doi:10.1007/s00037-001-8195-x}}.
+
+\bibitem{EKS17}
+Klim Efremenko, Gillat Kol, and Raghuvansh Saxena.
+\newblock Interactive coding over the noisy broadcast channel.
+\newblock {\em Electronic Colloquium on Computational Complexity {(ECCC)}},
+  24:93, 2017.
+\newblock URL: \url{https://eccc.weizmann.ac.il/report/2017/093}.
+
+\bibitem{GMWW17}
+Dmitry Gavinsky, Or~Meir, Omri Weinstein, and Avi Wigderson.
+\newblock Toward better formula lower bounds: The composition of a function and
+  a universal relation.
+\newblock {\em {SIAM} J. Comput.}, 46(1):114--131, 2017.
+\newblock URL: \url{https://doi.org/10.1137/15M1018319}, \href
+  {http://dx.doi.org/10.1137/15M1018319} {\path{doi:10.1137/15M1018319}}.
+
+\bibitem{HW90}
+Johan H{\aa}stad and Avi Wigderson.
+\newblock Composition of the universal relation.
+\newblock In Jin{-}Yi Cai, editor, {\em Advances In Computational Complexity
+  Theory, Proceedings of a {DIMACS} Workshop, New Jersey, USA, December 3-7,
+  1990}, volume~13 of {\em {DIMACS} Series in Discrete Mathematics and
+  Theoretical Computer Science}, pages 119--134. {DIMACS/AMS}, 1990.
+\newblock URL: \url{http://dimacs.rutgers.edu/Volumes/Vol13.html}.
+
+\bibitem{KRW95}
+Mauricio Karchmer, Ran Raz, and Avi Wigderson.
+\newblock Super-logarithmic depth lower bounds via the direct sum in
+  communication complexity.
+\newblock {\em Computational Complexity}, 5(3/4):191--204, 1995.
+\newblock URL: \url{https://doi.org/10.1007/BF01206317}, \href
+  {http://dx.doi.org/10.1007/BF01206317} {\path{doi:10.1007/BF01206317}}.
+
+\bibitem{KW88}
+Mauricio Karchmer and Avi Wigderson.
+\newblock Monotone circuits for connectivity require super-logarithmic depth.
+\newblock In Janos Simon, editor, {\em Proceedings of the 20th Annual {ACM}
+  Symposium on Theory of Computing, May 2-4, 1988, Chicago, Illinois, {USA}},
+  pages 539--550. {ACM}, 1988.
+\newblock URL: \url{http://doi.acm.org/10.1145/62212.62265}, \href
+  {http://dx.doi.org/10.1145/62212.62265} {\path{doi:10.1145/62212.62265}}.
+
+\bibitem{Kh72}
+V.~M. Khrapchenko.
+\newblock A method of obtaining lower bounds for the complexity of
+  $\pi$-schemes.
+\newblock {\em Mathematical Notes Academy of Sciences USSR}, 10:474--479, 1972.
+
+\bibitem{KN97}
+Eyal Kushilevitz and Noam Nisan.
+\newblock {\em Communication complexity}.
+\newblock Cambridge University Press, 1997.
+
+\bibitem{Yao79}
+Andrew Chi-Chih Yao.
+\newblock Some complexity questions related to distributive
+  computing(preliminary report).
+\newblock In {\em Proceedings of the Eleventh Annual ACM Symposium on Theory of
+  Computing}, STOC '79, pages 209--213, New York, NY, USA, 1979. ACM.
+\newblock URL: \url{http://doi.acm.org/10.1145/800135.804414}, \href
+  {http://dx.doi.org/10.1145/800135.804414} {\path{doi:10.1145/800135.804414}}.
+
+\end{thebibliography}

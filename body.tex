@@ -1,37 +1,37 @@
 \begin{abstract}
-Suppose Alice and Bob are communicating in order to compute some function $f$, but instead of a classical communication channel they have a pair of walkie-talkie devices. They can use some classical communication protocol for $f$ where each round one player sends a bit and the other one receives it. The question is whether talking via walkie-talkie gives them more power? Using walkie-talkie instead of a classical communication channel allows players two extra possibilities: to speak simultaneously (but in this case they do not hear each other) and to listen at the same time (but in this case they do not transfer any bits). The motivation for this kind of a communication model is coming from the study of the KRW conjecture. We show that for some definitions this non-classical communication model is, in fact, more powerful than the classical one as it allows to compute some functions in a smaller number of rounds. We also prove lower bounds for these models using both combinatorial and information theoretic methods.
+Suppose Alice and Bob are communicating in order to compute some function $f$, but instead of a classical communication channel they have a pair of walkie-talkie devices. They can use some classical communication protocol for $f$ where each round one player sends a bit and the other one receives it. The question is whether talking via walkie-talkie gives them more power? Using walkie-talkies instead of a classical communication channel allows players two extra possibilities: to speak simultaneously (but in this case they do not hear each other) and to listen at the same time (but in this case they do not transfer any bits). The motivation for this kind of a communication model comes from the study of the KRW conjecture. We show that for some definitions this non-classical communication model is, in fact, more powerful than the classical one as it allows to compute some functions in a smaller number of rounds. We also prove lower bounds for these models using both combinatorial and information theoretic methods.
 \end{abstract}
 
 
 \section{Introduction}
-In the classical communication complexity introduced by Yao \cite{Yao79}  two players, Alice and Bob,  are trying to compute $f(x,y)$, for some function $f$, where Alice knows only $x$ and Bob knows only $y$. Alice and Bob can communicate by sending bits to each other, one bit
-per round. The essential property of this \emph{classical} model is that in every round of communication one player
+In the classical communication complexity model introduced by Yao \cite{Yao79}  two players, Alice and Bob,  are trying to compute $f(x,y)$, for some function $f$, where Alice knows only $x$ and Bob knows only $y$. Alice and Bob can communicate by sending bits to each other, one bit
+per round. The essential property of this classical model is that in every round of communication one player
 sends some bit and the other one receives it.
 
 We define three new communication models that generalize the classical one and resemble
 communication over so-called \emph{half-duplex channels}.  A well-known example of half-duplex
-communication is talking via walkie-talkie: one has to hold a ``push-to-talk'' button to speak to another person, and one has to release it w want to listen. 
-If by accident two persons try to speak simultaneously then they do not hear each other. 
+communication is talking via walkie-talkie: one has to hold a ``push-to-talk'' button to speak to another person, and one has to release it to listen. 
+If two persons try to speak simultaneously then they do not hear each other. 
 We consider communication models where players are allowed to speak simultaneously. 
 Every round each player chooses one of three
 actions: send $0$, send $1$, or receive. There are three different types of rounds.
 If one player sends some bit and the other one receives then
 communication works like in the classical case, we call such rounds \emph{normal}. 
-If both players send bits in during the round then these bits get lost (the same happens if two persons try
+If both players send bits during the round then these bits get lost (the same happens if two persons try
 to speak via walkie-talkie simultaneously), we call these rounds \emph{spent}. 
 If both players receive, we call these rounds \emph{silent}. We distinguish three
 possible models, based on what happens in silent rounds. If in silent rounds
 both players receive $0$, i.e., players cannot distinguish a silent round from a normal round
 where the other player sends $0$, we call this model \emph{half-duplex communication with zero}. A somewhat similar model was studied in~\cite{EKS17} for multi-party communication with the noisy broadcast channel. Two other models, we will define later.
 
-In this paper, we study communication complexity of Boolean functions that are hard in the classical case. It is important to note that we care about multiplicative constants. Every classical communication can be viewed as half-duplex communication with zero and every half-duplex communication with zero can be simulated with classical communication doubling the number of rounds (see Theorem~\ref{thm:trivial-ub} and~\ref{thm:trivial-lb-2}). 
+In this paper, we study the communication complexity of Boolean functions that are hard in the classical case. It is important to note that we care about multiplicative constants. Every classical communication can be viewed as half-duplex communication with zero and every half-duplex communication with zero can be simulated with classical communication doubling the number of rounds (see Theorem~\ref{thm:trivial-ub} and~\ref{thm:trivial-lb-2}). 
 So the complexity of half-duplex communication is sandwiched between the complexity of the classical case and a half of it. The task of this study is to improve these bounds.
 
 \subsection{Motivation}
 The original motivation to study these kinds of communication models arose from the question of the
 complexity of Karchmer-Wigderson games~\cite{KW88} for multiplexers. The \emph{Karchmer-Wigderson game
 for a function} $f:\{0,1\}^n\to \{0,1\}$ (\emph{KW game}) is a (classical) communication problem where Alice is given
-$x\in f^{-1}(0)$, Bob is given $y\in f^{-1}(1)$, and they want to find $i\in[n]$ such that $x_i\neq
+$x\in f^{-1}(0)$, Bob is given $y\in f^{-1}(1)$, and they want to find an $i\in[n]$ such that $x_i\neq
 y_i$. Let $D(KW(f))$ be a minimal number of rounds that is enough to solve KW game for $f$ on any pair of possible inputs.
 \begin{conjecture}[KRW conjecture \cite{KRW95}]
 Let $f:\{0,1\}^n\to\{0,1\}$ and $g:\{0,1\}^m\to\{0,1\}$ be Boolean non-constant functions.
@@ -41,20 +41,21 @@ Then $D(KW(g\circ f))\approx D(KW(g)) + D(KW(f))$, where $g\circ f$ denotes a \e
 \)
 where $x_1,\dotsc,x_n\in\{0,1\}^m$.
 \end{conjecture}
-This conjecture implies super-logarithmic formula depth lower bound (and hence super-polynomial size lower bound): we can start with function on $\log n$ variables
-that requires logarithmic depth and construct a formula on $n$ variables that requires
+This conjecture implies a super-logarithmic formula depth lower bound (and hence a super-polynomial size lower bound): we can start with a maximally hard function on $\log n$ variables
+that requires $\log n$ depth and construct a formula on $n$ variables that requires
 super-logarithmic depth.
-In attempt to prove it a lot of work has been done studying KW games where one or both functions are replaced with \emph{universal relations}~\cite{HW90, EIRS01, GMWW17}. A \emph{multiplexer} (or \emph{indexing function}) is a function $M_n:\{0,1\}^{2^n}\times
+In attempt to prove it a lot of work has been done studying KW games where one or both functions are replaced with \emph{universal relations}~\cite{HW90, EIRS01, GMWW17}.
+Another approach to resolving the conjecture lies in examining multiplexer functions.
+A \emph{multiplexer} (or \emph{indexing function}) is a function $M_n:\{0,1\}^{2^n}\times
 \{0,1\}^n\to\{0,1\}$, such that $M_n(t,i) = t[i]$, i.e., $M_n$ interprets the first part of its input
 as the truth table of some function $f:\{0,1\}^n\to\{0,1\}$ and the second part as an input $x$ to the function, and outputs $f(x)$. 
 Multiplexers are similar to universal relations in the sense that there is a natural reduction 
 from a KW game for some function $f:\{0,1\}^n\to\{0,1\}$ to a KW game for multiplexer $M_n$: if Alice and Bob are given $x$ and $y$ in the game for $f$ we give them $(tt(f), x)$ 
 and $(tt(f),y)$, respectively, in the game for $M_n$, where $tt(f)$ is a truth table of function $f$. 
 On the other hand, multiplexers are functions, not relations, so proving analogous
-results for multiplexers would be one step toward proving KRW conjecture.
+results for multiplexers would be one step toward proving the KRW conjecture.
 Unfortunately, all the techniques that were used for universal relations cannot be applied directly 
-to multiplexers because it is impossible to give Alice and Bob the same input string
-(all these techniques exploited the symmetry of universal relations that allows giving players the same input string, but this is impossible for functions because inputs of Alice and Bob come from disjoint sets).
+to multiplexers because it is impossible to give Alice and Bob the same input string; all these techniques exploited the symmetry of universal relations that allows giving players the same input string, but this is impossible for functions because inputs of Alice and Bob come from disjoint sets.
 
 Suppose now that Alice and Bob are playing KW game for multiplexer $M_n$: Alice is
 given $(tt(f), x)$, $x\in f^{-1}(0)$, and Bob is given $(tt(g), y)$, $y\in g^{-1}(1)$. If the
@@ -67,19 +68,19 @@ but if in fact $f\neq g$ then in some round of this ``mixed'' protocol they migh
 both want to send or both want to receive at the same time.  
 Such protocol ``mixing'' is impossible in the classical model. 
 To make it possible we extend the communication model by allowing players to speak or listen simultaneously. How does it affect the communication complexity? Answering this question we care about multiplicative constants~--- 
-if in this model all (hard) functions become two times easier in respect to the classical case then this model is useless for proving KRW conjecture.
-As a first step toward answering this question, we study half-duplex communication complexity of Boolean functions $\{0,1\}^n\times\{0,1\}^n\to \{0,1\}$ in respect to the classical case. 
+if in this model all (hard) functions become two times easier in respect to the classical case then this model is useless for proving the KRW conjecture.
+As a first step toward answering this question, we study the half-duplex communication complexity of Boolean functions $\{0,1\}^n\times\{0,1\}^n\to \{0,1\}$ in respect to the classical case. 
 
 \subsection{Organization of this paper}
-In Section~\ref{sec:defs}, we give definitions for considered communication models. Then, in Section~\ref{sec:trivial-bounds}, we prove trivial upper and lower bounds that follows immediately from the definitions. Next, in Section~\ref{sec:methods}, we discuss methods for proving communication complexity lower bounds. In Sections~\ref{sec:hds}, \ref{sec:hdz} and \ref{sec:hda}, we present our main results, upper and lower bounds for proposed communication models. Finally, in Section~\ref{sec:open-questions}, we state several open questions.
+In Section~\ref{sec:defs}, we give definitions for the new communication models. Then, in Section~\ref{sec:trivial-bounds}, we prove trivial upper and lower bounds that follows immediately from the definitions. Next, in Section~\ref{sec:methods}, we discuss methods for proving communication complexity lower bounds. In Sections~\ref{sec:hds}, \ref{sec:hdz} and \ref{sec:hda}, we present our main results, upper and lower bounds for proposed communication models. Finally, in Section~\ref{sec:open-questions}, we state several open questions.
 
 \section{Definitions}\label{sec:defs}
 \begin{definition}
-Let $X$, $Y$, and $Z$ be some finite sets. We say that two players, Alice and Bob, are solving
-\emph{half-duplex communication problem} for relation $R \subseteq X\times Y\times Z$ if sets $X$, $Y$, $Z$, and
+Let $X$, $Y$, and $Z$ be some finite sets. We say that two players, Alice and Bob, are solving the
+\emph{half-duplex communication problem} for a relation $R \subseteq X\times Y\times Z$ if sets $X$, $Y$, $Z$, and the
 relation $R$ are known by both players, Alice is given some $x\in X$, Bob is given some $y\in Y$,
-and players want to find some $z\in Z$ such that $(x,y,z)\in R$, by communicating to each other. 
-The communication is organized into rounds. At every round, each player decides 
+and players want to find some $z\in Z$ such that $(x,y,z)\in R$, by communicating to each other via a half-duplex channel. 
+The communication is organized into rounds. At each round, both players decide 
 (depending only on their inputs and previous communication) to
 do one of three available actions: send 0, send 1 or receive.
 If one player sends some bit $b\in\{0,1\}$ and the other one receives then the latter gets bit $b$, we
@@ -90,7 +91,7 @@ If both players receive at the same time, we call such rounds \emph{silent}.
 There are three variants of half-duplex communication problem depending
 on how silent rounds work.
 \begin{itemize}
-\item In a silent round both players receive \emph{nothing}, so it is possible for both players to distinguish
+\item In a silent round both players receive a special symbol \texttt{silence}, so it is possible for both players to distinguish
     a silent round from a normal one, the corresponding problem is called \emph{half-duplex communication problem with silence}.
 
 \item In a silent round both players receive $0$, i.e., players cannot distinguish a silent round from a normal round where the other player sends $0$, the corresponding problem is called 
